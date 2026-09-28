@@ -1,590 +1,407 @@
 <!DOCTYPE html>
-<html lang="ru" x-data="{ mobileMenu: false, modalOpen: false, modalType: 'КП' }">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynalasers.ru — Аппараты ручной лазерной сварки от производителя</title>
-  <meta name="description" content="Промышленные лазерные аппараты сварки, резки и чистки Dynalasers M30, M50, M70, D70. Поставки по РФ, бесплатное обучение, гарантия 24 месяца.">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Alpine.js -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Лазерные сварочные аппараты M70 и D70</title>
+  <style>
+    /* --- СБРОС И ОСНОВНЫЕ СТИЛИ --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              slate: '#0F172A',
-              blue: '#0284C7',
-              darkblue: '#0369A1',
-              orange: '#F97316'
-            }
-          }
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      color: #222222;
+      background-color: #f8f9fa;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* --- ШАПКА (HEADER) --- */
+    header {
+      background-color: #ffffff;
+      border-bottom: 3px solid #ffc107; /* Желтый акцент */
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo img {
+      max-height: 50px;
+      width: auto;
+      display: block;
+    }
+
+    .header-contacts {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .phone-link {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #111111;
+      text-decoration: none;
+      background-color: #ffc107; /* Желтая кнопка телефона */
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+    }
+
+    .phone-link:hover {
+      background-color: #ffb300;
+    }
+
+    /* --- ПЛАНКИ ПРЕИМУЩЕСТВ (БЕНЕФИТЫ) --- */
+    .benefits-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .benefit-card {
+      background-color: #ffffff;
+      border-left: 5px solid #ffc107; /* Желтая полоса слева */
+      padding: 15px 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .benefit-icon {
+      font-size: 1.5rem;
+    }
+
+    .benefit-title {
+      font-size: 0.85rem;
+      color: #666666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .benefit-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    /* --- ГАЛЕРЕЯ МОДЕЛЕЙ --- */
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #111111;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background-color: #ffc107; /* Желтое подчеркивание заголовка */
+      border-radius: 2px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background-color: #ffffff;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-color: #ffc107;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+
+    .product-card h3 {
+      font-size: 1.2rem;
+      color: #111111;
+      background-color: #fff8e1; /* Легкий желтый фон заголовка */
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    /* --- ТАБЛИЦА ХАРАКТЕРИСТИК --- */
+    .table-wrapper {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      overflow-x: auto;
+      margin-bottom: 40px;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 600px;
+    }
+
+    .specs-table th,
+    .specs-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .specs-table th {
+      background-color: #111111; /* Тёмный заголовок для яркого контраста */
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .specs-table th.highlight-header {
+      color: #ffc107; /* Желтый текст для названий моделей */
+      text-align: center;
+      width: 25%;
+    }
+
+    .specs-table tr:nth-child(even) {
+      background-color: #fffde7; /* Едва заметная желтая зебра для строк */
+    }
+
+    .specs-table tr:hover {
+      background-color: #fff9c4; /* Яркая подсвечиваемая строка при наведении */
+    }
+
+    .specs-table td:nth-child(2),
+    .specs-table td:nth-child(3) {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .badge-turbo {
+      display: inline-block;
+      background-color: #ffc107;
+      color: #111111;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    /* --- АДАПТИВНОСТЬ --- */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .header-contacts {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .phone-link {
+        width: 100%;
+        text-align: center;
+      }
+
+      .specs-table th,
+      .specs-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
       }
     }
-  </script>
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body>
 
-  <!-- ==================== ШАПКА / HEADER ==================== -->
-  <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-lg">
-    <!-- Top Bar -->
-    <div class="border-b border-slate-800 text-xs py-2 px-4 sm:px-8 bg-slate-950">
-      <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center space-x-6">
-          <span><i class="fa-solid font-bold text-sky-400 fa-location-dot mr-1"></i> Москва / Склад в РФ</span>
-          <span class="hidden md:inline"><i class="fa-solid text-sky-400 fa-shield-halved mr-1"></i> Гарантия 24 месяца</span>
-          <span class="hidden lg:inline"><i class="fa-solid text-sky-400 fa-truck mr-1"></i> Доставка и обучение по РФ</span>
-        </div>
-        <div class="flex items-center space-x-4">
-          <a href="tel:88000000000" class="font-bold hover:text-sky-400 transition"><i class="fa-solid fa-phone mr-1"></i> 8 (800) 000-00-00</a>
-          <span class="text-slate-600">|</span>
-          <a href="mailto:info@dynalasers.ru" class="hover:text-sky-400 hidden sm:inline">info@dynalasers.ru</a>
-        </div>
+  <!-- ШАПКА С ЛОГОТИПОМ И КОНТАКТАМИ -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <img src="images/logo.png" alt="Логотип компании">
       </div>
-    </div>
-
-    <!-- Main Navigation -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex justify-between items-center">
-      <a href="/" class="flex items-center space-x-2">
-        <span class="text-2xl font-black tracking-wider text-white">DYNA<span class="text-sky-400">LASERS</span></span>
-        <span class="text-[10px] bg-sky-600 text-white px-1.5 py-0.5 rounded font-mono font-bold">PRO</span>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-        <a href="#models" class="hover:text-sky-400 transition">Каталог</a>
-        <a href="#compare" class="hover:text-sky-400 transition">Лазер vs TIG/MIG</a>
-        <a href="#calculator" class="hover:text-sky-400 transition">Окупаемость</a>
-        <a href="#service" class="hover:text-sky-400 transition">Сервис и Гарантия</a>
-        <a href="#contacts" class="hover:text-sky-400 transition">Контакты</a>
-      </nav>
-
-      <!-- CTA Buttons Desktop -->
-      <div class="hidden lg:flex items-center space-x-3">
-        <button @click="modalOpen = true; modalType = 'Демо-показ'" class="border border-sky-500 text-sky-400 hover:bg-sky-500 hover:text-white px-4 py-2 rounded-lg text-xs font-semibold transition">
-          Записаться на Демо
-        </button>
-        <button @click="modalOpen = true; modalType = 'Запрос КП'" class="bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition">
-          Запросить КП
-        </button>
-      </div>
-
-      <!-- Mobile menu button -->
-      <button @click="mobileMenu = !mobileMenu" class="md:hidden text-2xl focus:outline-none">
-        <i class="fa-solid" :class="mobileMenu ? 'fa-xmark' : 'fa-bars'"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Navigation Drawer -->
-    <div x-show="mobileMenu" x-transition class="md:hidden bg-slate-900 border-b border-slate-800 px-4 py-4 space-y-3">
-      <a href="#models" @click="mobileMenu = false" class="block py-2 text-sm font-medium border-b border-slate-800">Каталог моделей</a>
-      <a href="#compare" @click="mobileMenu = false" class="block py-2 text-sm font-medium border-b border-slate-800">Сравнение с TIG/MIG</a>
-      <a href="#calculator" @click="mobileMenu = false" class="block py-2 text-sm font-medium border-b border-slate-800">Калькулятор окупаемости</a>
-      <a href="#service" @click="mobileMenu = false" class="block py-2 text-sm font-medium border-b border-slate-800">Сервис и Обучение</a>
-      <div class="pt-2 space-y-2">
-        <button @click="modalOpen = true; modalType = 'КП'; mobileMenu = false" class="w-full bg-sky-600 text-white py-2.5 rounded-lg text-sm font-bold">Запросить КП</button>
-        <button @click="modalOpen = true; modalType = 'Демо-показ'; mobileMenu = false" class="w-full border border-sky-500 text-sky-400 py-2.5 rounded-lg text-sm font-bold">Записаться на Демо</button>
+      <div class="header-contacts">
+        <a href="tel:+74953673277" class="phone-link">+7 495 367 32 77</a>
       </div>
     </div>
   </header>
 
-  <!-- ==================== 1. HERO SECTION ==================== -->
-  <section class="bg-slate-900 text-white py-16 lg:py-24 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900 to-sky-950 opacity-90"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 relative z-10 grid lg:grid-cols-12 gap-12 items-center">
-      
-      <div class="lg:col-span-7 space-y-6">
-        <div class="inline-flex items-center space-x-2 bg-slate-800/80 border border-slate-700 px-3 py-1.5 rounded-full text-xs font-semibold text-sky-400">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>Официальные поставки в РФ • Сервисный центр</span>
-        </div>
-        
-        <h1 class="text-3xl sm:text-5xl font-black leading-tight">
-          Аппараты ручной лазерной сварки <span class="text-sky-400">Dynalasers</span>
-        </h1>
-        
-        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
-          Увеличьте скорость сварки тонколистового металла в 2–4 раза по сравнению с TIG/MIG. Минимальная деформация, идеальный шов без постобработки и обучение оператора за 2 часа.
-        </p>
+  <main class="container">
 
-        <!-- Bullet List -->
-        <div class="grid grid-cols-2 gap-3 pt-2 text-sm text-slate-200">
-          <div class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-400"></i><span>Функционал 3-в-1 (Сварка/Резка/Чистка)</span></div>
-          <div class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-400"></i><span>Встроенный податчик проволоки</span></div>
-          <div class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-400"></i><span>Бесплатное обучение операторов</span></div>
-          <div class="flex items-center space-x-2"><i class="fa-solid fa-check text-sky-400"></i><span>Гарантия 24 месяца в РФ</span></div>
-        </div>
-
-        <!-- Hero CTAs -->
-        <div class="pt-4 flex flex-col sm:flex-row gap-4">
-          <button @click="modalOpen = true; modalType = 'Подбор аппарата'" class="bg-sky-600 hover:bg-sky-500 text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg shadow-sky-600/30 transition text-center">
-            Подобрать аппарат и затребовать КП
-          </button>
-          <button @click="modalOpen = true; modalType = 'Тест-драйв'" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-6 py-4 rounded-xl font-semibold text-base transition flex items-center justify-center space-x-2">
-            <i class="fa-solid fa-play text-sky-400"></i>
-            <span>Записаться на Тест-драйв</span>
-          </button>
+    <!-- БЛОК ПРЕИМУЩЕСТВ (СКЛАД И ГАРАНТИЯ) -->
+    <section class="benefits-bar">
+      <div class="benefit-card">
+        <span class="benefit-icon">📍</span>
+        <div>
+          <div class="benefit-title">Локация / Наличие</div>
+          <div class="benefit-value">МО, г. Видное / Склад в РФ</div>
         </div>
       </div>
-
-      <!-- Hero Visual Card -->
-      <div class="lg:col-span-5 relative">
-        <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-4">
-          <div class="flex justify-between items-center border-b border-slate-700 pb-3">
-            <div>
-              <span class="text-xs font-mono text-sky-400 uppercase tracking-widest font-bold">Флагман серии</span>
-              <h3 class="text-2xl font-black text-white">Dynalasers D70</h3>
-            </div>
-            <span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs px-2.5 py-1 rounded-full font-bold">
-              Turbo +10%
-            </span>
-          </div>
-
-          <!-- Product Image Placeholder -->
-          <div class="bg-slate-950 rounded-xl h-56 flex flex-col items-center justify-center border border-slate-800 text-slate-500 relative">
-            <i class="fa-solid fa-bolt-lightning text-5xl text-sky-500/40 mb-2"></i>
-            <span class="text-xs font-mono">[ Фото / 3D-модель аппарата D70 ]</span>
-            <div class="absolute bottom-3 left-3 bg-slate-900/90 border border-slate-700 px-3 py-1 rounded text-[11px] text-slate-300">
-              Мощность: 1800 Вт (+10% Турбо)
-            </div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-2 text-center text-xs">
-            <div class="bg-slate-900 p-2 rounded border border-slate-700/50">
-              <div class="text-slate-400 text-[10px]">Нержавейка</div>
-              <div class="font-bold text-white text-sm">до 4.5 мм</div>
-            </div>
-            <div class="bg-slate-900 p-2 rounded border border-slate-700/50">
-              <div class="text-slate-400 text-[10px]">Сталь</div>
-              <div class="font-bold text-white text-sm">до 4.5 мм</div>
-            </div>
-            <div class="bg-slate-900 p-2 rounded border border-slate-700/50">
-              <div class="text-slate-400 text-[10px]">Алюминий</div>
-              <div class="font-bold text-white text-sm">до 3.5 мм</div>
-            </div>
-          </div>
-
-          <button @click="modalOpen = true; modalType = 'КП D70'" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-bold text-sm transition">
-            Узнать стоимость и наличие
-          </button>
+      <div class="benefit-card">
+        <span class="benefit-icon">🛡️</span>
+        <div>
+          <div class="benefit-title">Сервис и надежность</div>
+          <div class="benefit-value">Гарантия 12 месяцев</div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- ГАЛЕРЕЯ МОДЕЛЕЙ -->
+    <section>
+      <h2 class="section-title">Модельный ряд</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="images/M30.png" alt="Модель M30">
+          <h3>Модель M30</h3>
+        </div>
+        <div class="product-card">
+          <img src="images/M50.png" alt="Модель M50">
+          <h3>Модель M50</h3>
+        </div>
+        <div class="product-card">
+          <img src="images/M70.png" alt="Модель M70">
+          <h3>Модель M70</h3>
+        </div>
+        <div class="product-card">
+          <img src="images/D30.png" alt="Модель D70">
+          <h3>Модель D70</h3>
+        </div>
+      </div>
+    </section>
 
-  <!-- ==================== 2. ПОЛОСА ДОВЕРИЯ ==================== -->
-  <section class="bg-slate-950 border-y border-slate-800 py-8 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div>
-        <div class="text-3xl sm:text-4xl font-black text-sky-400 font-mono">2–4×</div>
-        <div class="text-xs sm:text-sm text-slate-400 mt-1">Рост скорости сварки</div>
-      </div>
-      <div>
-        <div class="text-3xl sm:text-4xl font-black text-sky-400 font-mono">2 часа</div>
-        <div class="text-xs sm:text-sm text-slate-400 mt-1">Обучение сварщика</div>
-      </div>
-      <div>
-        <div class="text-3xl sm:text-4xl font-black text-sky-400 font-mono">24 мес</div>
-        <div class="text-xs sm:text-sm text-slate-400 mt-1">Гарантия в РФ</div>
-      </div>
-      <div>
-        <div class="text-3xl sm:text-4xl font-black text-sky-400 font-mono">100%</div>
-        <div class="text-xs sm:text-sm text-slate-400 mt-1">Запчасти на складе</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 3. СРАВНЕНИЕ ЛАЗЕР vs TIG/MIG ==================== -->
-  <section id="compare" class="py-16 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-2xl sm:text-4xl font-black text-slate-900">Зачем заменять TIG/MIG на лазерную сварку?</h2>
-        <p class="text-slate-600 mt-3 text-sm sm:text-base">Сравнение реальных показателей производительности на тонколистовом металле (до 5 мм)</p>
-      </div>
-
-      <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-slate-200">
-        <table class="w-full text-left text-xs sm:text-sm">
+    <!-- СРАВНИТЕЛЬНАЯ ТАБЛИЦА ХАРАКТЕРИСТИК -->
+    <section>
+      <h2 class="section-title">Технические характеристики M70 и D70</h2>
+      <div class="table-wrapper">
+        <table class="specs-table">
           <thead>
-            <tr class="bg-slate-900 text-white border-b border-slate-800">
-              <th class="p-4 font-bold">Параметр сравнения</th>
-              <th class="p-4 font-bold bg-sky-900/60 text-sky-300 border-x border-sky-800">Лазерная сварка Dynalasers</th>
-              <th class="p-4 font-bold">TIG (Аргонодуговая)</th>
-              <th class="p-4 font-bold">MIG/MAG (Полуавтомат)</th>
+            <tr>
+              <th>Характеристики</th>
+              <th class="highlight-header">M70</th>
+              <th class="highlight-header">D70</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-100 font-medium">
+          <tbody>
             <tr>
-              <td class="p-4 font-bold text-slate-900">Скорость сварки</td>
-              <td class="p-4 bg-sky-50 text-sky-950 font-bold border-x border-sky-100">Высокая (в 2–4 раза быстрее TIG)</td>
-              <td class="p-4 text-slate-600">Низкая</td>
-              <td class="p-4 text-slate-600">Средняя</td>
+              <td>Мощность лазера</td>
+              <td>1800 Вт</td>
+              <td>1800 Вт</td>
             </tr>
             <tr>
-              <td class="p-4 font-bold text-slate-900">Деформация и дефекты</td>
-              <td class="p-4 bg-sky-50 text-sky-950 font-bold border-x border-sky-100">Минимальная (узкая зона нагрева)</td>
-              <td class="p-4 text-slate-600">Сильная деформация</td>
-              <td class="p-4 text-slate-600">Средняя деформация, брызги</td>
+              <td>Режим работы</td>
+              <td>Непрерывный / Точечный / Импульсный / Турбо <span class="badge-turbo">TURBO</span></td>
+              <td>Непрерывный / Точечный / Импульсный</td>
             </tr>
             <tr>
-              <td class="p-4 font-bold text-slate-900">Постобработка (шлифовка)</td>
-              <td class="p-4 bg-sky-50 text-sky-950 font-bold border-x border-sky-100">Не требуется в 80% случаев</td>
-              <td class="p-4 text-slate-600">Требуется зачистка</td>
-              <td class="p-4 text-slate-600">Обязательная зачистка брызг</td>
+              <td>Вес сварочного пистолета</td>
+              <td>&lt; 0.48 кг</td>
+              <td>&lt; 0.48 кг</td>
             </tr>
             <tr>
-              <td class="p-4 font-bold text-slate-900">Требование к сварщику</td>
-              <td class="p-4 bg-sky-50 text-sky-950 font-bold border-x border-sky-100">Оператор без опыта (обучение 2 часа)</td>
-              <td class="p-4 text-slate-600">Высокая квалификация (6 разряд)</td>
-              <td class="p-4 text-slate-600">Средняя квалификация</td>
+              <td>Вес аппарата</td>
+              <td>&lt; 45 кг</td>
+              <td>&lt; 43 кг</td>
+            </tr>
+            <tr>
+              <td>Размеры аппарата (Д × Ш × В)</td>
+              <td>654 × 286 × 574 мм</td>
+              <td>637 × 274 × 574 мм</td>
+            </tr>
+            <tr>
+              <td>Входное напряжение</td>
+              <td>180–264 В, 50/60 Гц</td>
+              <td>180–264 В, 50/60 Гц</td>
+            </tr>
+            <tr>
+              <td>Способ охлаждения</td>
+              <td>Принудительное воздушное охлаждение</td>
+              <td>Принудительное воздушное охлаждение</td>
+            </tr>
+            <tr>
+              <td>Функции</td>
+              <td>Сварка / Резка / Очистка</td>
+              <td>Сварка / Резка / Очистка</td>
+            </tr>
+            <tr>
+              <td>Устройство подачи проволоки</td>
+              <td>Встроено</td>
+              <td>Встроено</td>
+            </tr>
+            <tr>
+              <td>Максимальная глубина сварки, нержавеющая сталь</td>
+              <td>7 мм</td>
+              <td>7 мм</td>
+            </tr>
+            <tr>
+              <td>Максимальная глубина сварки, углеродистая сталь</td>
+              <td>7 мм</td>
+              <td>7 мм</td>
+            </tr>
+            <tr>
+              <td>Максимальная глубина сварки, оцинкованная сталь</td>
+              <td>7 мм</td>
+              <td>7 мм</td>
+            </tr>
+            <tr>
+              <td>Максимальная глубина сварки, алюминий</td>
+              <td>5.5 мм</td>
+              <td>5.5 мм</td>
+            </tr>
+            <tr>
+              <td>Максимальная глубина сварки, латунь</td>
+              <td>6 мм</td>
+              <td>6 мм</td>
+            </tr>
+            <tr>
+              <td>Максимальная глубина сварки, медь</td>
+              <td>2.5 мм</td>
+              <td>2.5 мм</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ==================== 4. КАЛЬКУЛЯТОР ОКУПАЕМОСТИ ==================== -->
-  <section id="calculator" class="py-16 bg-slate-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="grid lg:grid-cols-12 gap-10 items-center">
-        
-        <div class="lg:col-span-5 space-y-4">
-          <span class="text-sky-400 font-mono text-xs font-bold uppercase">Экономический эффект</span>
-          <h2 class="text-2xl sm:text-4xl font-black">Быстрая окупаемость за счет роста выработки</h2>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Лазерный аппарат окупается за 3–6 месяцев за счет сокращения фонда оплаты труда высококлассных сварщиков и ликвидации этапа зачистки швов.
-          </p>
-        </div>
-
-        <div class="lg:col-span-7 bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 shadow-xl" x-data="{ workers: 2, salary: 100000 }">
-          <h3 class="text-xl font-bold mb-6 text-white border-b border-slate-700 pb-3">Экспресс-расчет экономии в месяц</h3>
-          
-          <div class="space-y-6">
-            <div>
-              <div class="flex justify-between text-xs mb-2">
-                <span class="text-slate-300">Количество сварщиков TIG в штате:</span>
-                <span class="font-bold text-sky-400 text-sm" x-text="workers"></span>
-              </div>
-              <input type="range" min="1" max="10" x-model="workers" class="w-full accent-sky-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
-            </div>
-
-            <div>
-              <div class="flex justify-between text-xs mb-2">
-                <span class="text-slate-300">Средняя зарплата сварщика TIG (руб/мес):</span>
-                <span class="font-bold text-sky-400 text-sm" x-text="Number(salary).toLocaleString('ru-RU') + ' ₽'"></span>
-              </div>
-              <input type="range" min="60000" max="200000" step="10000" x-model="salary" class="w-full accent-sky-500 bg-slate-700 h-2 rounded-lg cursor-pointer">
-            </div>
-
-            <div class="p-4 bg-slate-950 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div>
-                <div class="text-xs text-slate-400">Ориентировочная экономия за 1 год:</div>
-                <div class="text-2xl font-black text-emerald-400 font-mono" x-text="Number(workers * salary * 12 * 0.45).toLocaleString('ru-RU') + ' ₽'"></div>
-              </div>
-              <button @click="modalOpen = true; modalType = 'Расчет окупаемости'" class="bg-sky-600 hover:bg-sky-500 text-white text-xs px-5 py-3 rounded-lg font-bold transition whitespace-nowrap">
-                Получить детальный расчет PDF
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 5. КАТАЛОГ МОДЕЛЕЙ ==================== -->
-  <section id="models" class="py-16 bg-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-        <div>
-          <span class="text-sky-600 font-mono text-xs font-bold uppercase">Модельный ряд</span>
-          <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-1">Аппараты Dynalasers серии M и D</h2>
-        </div>
-        <div class="mt-4 md:mt-0 text-xs text-slate-500"> Все модели включают функционал 3-в-1 и податчик проволоки</div>
-      </div>
-
-      <!-- Catalog Grid (4 Models) -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <!-- M30 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-3">
-              <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded font-mono font-bold">Серия M</span>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">В наличии</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900">Dynalasers M30</h3>
-            <div class="text-xs text-slate-500 mt-1">Мощность: <strong class="text-slate-800">800 Вт</strong></div>
-            
-            <div class="my-4 bg-slate-50 h-40 rounded-xl flex items-center justify-center border border-slate-100 text-slate-400 text-xs font-mono">
-              [ Фото M30 ]
-            </div>
-
-            <ul class="text-xs space-y-2 text-slate-600 mb-6">
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Нержавейка: <strong>до 2.5 мм</strong></li>
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Сталь: <strong>до 2.5 мм</strong></li>
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Алюминий: <strong>до 1.5 мм</strong></li>
-            </ul>
-          </div>
-          <button @click="modalOpen = true; modalType = 'КП M30'" class="w-full bg-slate-900 hover:bg-sky-600 text-white text-xs py-3 rounded-xl font-bold transition">
-            Запросить цену M30
-          </button>
-        </div>
-
-        <!-- M50 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-3">
-              <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded font-mono font-bold">Серия M</span>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">В наличии</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900">Dynalasers M50</h3>
-            <div class="text-xs text-slate-500 mt-1">Мощность: <strong class="text-slate-800">1200 Вт</strong></div>
-            
-            <div class="my-4 bg-slate-50 h-40 rounded-xl flex items-center justify-center border border-slate-100 text-slate-400 text-xs font-mono">
-              [ Фото M50 ]
-            </div>
-
-            <ul class="text-xs space-y-2 text-slate-600 mb-6">
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Нержавейка: <strong>до 3.5 мм</strong></li>
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Сталь: <strong>до 3.5 мм</strong></li>
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Алюминий: <strong>до 2.5 мм</strong></li>
-            </ul>
-          </div>
-          <button @click="modalOpen = true; modalType = 'КП M50'" class="w-full bg-slate-900 hover:bg-sky-600 text-white text-xs py-3 rounded-xl font-bold transition">
-            Запросить цену M50
-          </button>
-        </div>
-
-        <!-- M70 -->
-        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-start mb-3">
-              <span class="bg-slate-100 text-slate-700 text-xs px-2.5 py-1 rounded font-mono font-bold">Серия M</span>
-              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">В наличии</span>
-            </div>
-            <h3 class="text-xl font-bold text-slate-900">Dynalasers M70</h3>
-            <div class="text-xs text-slate-500 mt-1">Мощность: <strong class="text-slate-800">1800 Вт</strong></div>
-            
-            <div class="my-4 bg-slate-50 h-40 rounded-xl flex items-center justify-center border border-slate-100 text-slate-400 text-xs font-mono">
-              [ Фото M70 ]
-            </div>
-
-            <ul class="text-xs space-y-2 text-slate-600 mb-6">
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Нержавейка: <strong>до 4.5 мм</strong></li>
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Сталь: <strong>до 4.5 мм</strong></li>
-              <li><i class="fa-solid fa-check text-sky-500 mr-1.5"></i>Алюминий: <strong>до 3.5 мм</strong></li>
-            </ul>
-          </div>
-          <button @click="modalOpen = true; modalType = 'КП M70'" class="w-full bg-slate-900 hover:bg-sky-600 text-white text-xs py-3 rounded-xl font-bold transition">
-            Запросить цену M70
-          </button>
-        </div>
-
-        <!-- D70 (Top) -->
-        <div class="bg-slate-900 text-white rounded-2xl border-2 border-sky-500 p-5 shadow-xl transition flex flex-col justify-between relative overflow-hidden">
-          <div class="absolute -right-8 -top-8 bg-orange-500 text-white text-[10px] font-bold py-1 px-8 rotate-45 font-mono">
-            TURBO
-          </div>
-          <div>
-            <div class="flex justify-between items-start mb-3">
-              <span class="bg-sky-600 text-white text-xs px-2.5 py-1 rounded font-mono font-bold">Серия D</span>
-              <span class="text-xs font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">Хит продаж</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">Dynalasers D70</h3>
-            <div class="text-xs text-sky-300 mt-1">1800 Вт <span class="text-orange-400 font-bold">(+10% Turbo-режим)</span></div>
-            
-            <div class="my-4 bg-slate-950 h-40 rounded-xl flex items-center justify-center border border-slate-800 text-slate-500 text-xs font-mono">
-              [ Фото D70 Turbo ]
-            </div>
-
-            <ul class="text-xs space-y-2 text-slate-300 mb-6">
-              <li><i class="fa-solid fa-check text-sky-400 mr-1.5"></i>Премиальный корпус и стайлинг</li>
-              <li><i class="fa-solid fa-check text-sky-400 mr-1.5"></i>Турбо-режим кратковременной мощности</li>
-              <li><i class="fa-solid fa-check text-sky-400 mr-1.5"></i>Усиленная система охлаждения</li>
-            </ul>
-          </div>
-          <button @click="modalOpen = true; modalType = 'КП D70'" class="w-full bg-sky-600 hover:bg-sky-500 text-white text-xs py-3 rounded-xl font-bold transition shadow-lg shadow-sky-600/40">
-            Запросить цену D70
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 13. СЕРВИС И ГАРАНТИЯ ==================== -->
-  <section id="service" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-sky-600 font-mono text-xs font-bold uppercase">Поддержка клиентов</span>
-        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 mt-1">Сервисный центр и обучение в РФ</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-          <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600 text-xl font-bold mb-4">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Бесплатное обучение</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Обучаем ваших сотрудников работе с аппаратом, настройке параметров под ваши металлы и технике безопасности.
-          </p>
-        </div>
-
-        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-          <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600 text-xl font-bold mb-4">
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Гарантия 24 месяца</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Полный спектр гарантийного и постгарантийного обслуживания. Выезд сервисного инженера при необходимости.
-          </p>
-        </div>
-
-        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-          <div class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-sky-600 text-xl font-bold mb-4">
-            <i class="fa-solid fa-boxes-packing"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Расходники в наличии</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Защитные стекла, линзы, сопла, каналы для проволоки всегда хранятся на складе в РФ. Отгрузка за 24 часа.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 17. ФИНАЛЬНЫЙ CTA-БЛОК С ФОРМОЙ ==================== -->
-  <section id="contacts" class="py-16 bg-slate-950 text-white border-t border-slate-800">
-    <div class="max-w-5xl mx-auto px-4 sm:px-8">
-      <div class="bg-gradient-to-br from-slate-900 to-sky-950 p-8 sm:p-12 rounded-3xl border border-slate-800 shadow-2xl">
-        <div class="text-center max-w-2xl mx-auto mb-8 space-y-3">
-          <h2 class="text-2xl sm:text-4xl font-black">Получите коммерческое предложение</h2>
-          <p class="text-slate-300 text-xs sm:text-sm">
-            Отправим подробный прайс-лист, технический паспорт оборудования и варианты проведения бесплатного демо-показа.
-          </p>
-        </div>
-
-        <form @submit.prevent="alert('Спасибо! Заявка принята, мы свяжемся с вами.'); modalOpen = false;" class="space-y-4 max-w-xl mx-auto">
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-300 mb-1">Ваше имя *</label>
-              <input type="text" required placeholder="Иван Петров" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-sky-500 text-white">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-300 mb-1">Телефон *</label>
-              <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-sky-500 text-white">
-            </div>
-          </div>
-
-          <div class="grid sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-300 mb-1">Компания / ИНН</label>
-              <input type="text" placeholder="ООО МеталлПром" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-sky-500 text-white">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-300 mb-1">Модель или мощность</label>
-              <select class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-sky-500 text-white">
-                <option value="Не определились">Нужна консультация по подбору</option>
-                <option value="M30">Dynalasers M30 (800W)</option>
-                <option value="M50">Dynalasers M50 (1200W)</option>
-                <option value="M70">Dynalasers M70 (1800W)</option>
-                <option value="D70">Dynalasers D70 Turbo (1800W+)</option>
-              </select>
-            </div>
-          </div>
-
-          <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-4 rounded-xl text-sm transition shadow-lg shadow-sky-600/30">
-            Запросить коммерческое предложение и прайс
-          </button>
-
-          <div class="text-center text-[10px] text-slate-400 pt-2">
-            Нажимая кнопку, вы соглашаетесь с Политикой конфиденциальности.
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 18. ФУТЕР / FOOTER ==================== -->
-  <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-      <div>
-        <div class="text-white font-black text-lg mb-3">DYNA<span class="text-sky-400">LASERS</span></div>
-        <p class="leading-relaxed text-slate-500">
-          Поставка и сервисное обслуживание лазерных аппаратов сварки, резки и чистки в РФ.
-        </p>
-      </div>
-      <div>
-        <div class="text-white font-bold mb-3">Каталог</div>
-        <ul class="space-y-2">
-          <li><a href="#models" class="hover:text-white transition">Dynalasers M30</a></li>
-          <li><a href="#models" class="hover:text-white transition">Dynalasers M50</a></li>
-          <li><a href="#models" class="hover:text-white transition">Dynalasers M70</a></li>
-          <li><a href="#models" class="hover:text-white transition">Dynalasers D70 Turbo</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="text-white font-bold mb-3">Сервис и Поддержка</div>
-        <ul class="space-y-2">
-          <li><a href="#service" class="hover:text-white transition">Гарантия 24 месяца</a></li>
-          <li><a href="#service" class="hover:text-white transition">Обучение операторов</a></li>
-          <li><a href="#service" class="hover:text-white transition">Запасные части и расходники</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="text-white font-bold mb-3">Контакты</div>
-        <ul class="space-y-2">
-          <li>Тел: 8 (800) 000-00-00</li>
-          <li>Email: info@dynalasers.ru</li>
-          <li>Склад: г. Москва (доставка по всей РФ)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center text-slate-600 text-[11px]">
-      <div>© 2026 Dynalasers.ru. Все права защищены.</div>
-      <div class="mt-2 sm:mt-0">Политика конфиденциальности</div>
-    </div>
-  </footer>
-
-  <!-- ==================== МОДАЛЬНОЕ ОКНО (POPUP) ==================== -->
-  <div x-show="modalOpen" x-transition class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm" style="display: none;">
-    <div @click.outside="modalOpen = false" class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 text-white relative shadow-2xl">
-      <button @click="modalOpen = false" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <h3 class="text-xl font-bold mb-2" x-text="modalType"></h3>
-      <p class="text-xs text-slate-300 mb-6">Оставьте контакты, и наш технический специалист свяжется с вами в течение 15 минут.</p>
-
-      <form @submit.prevent="alert('Заявка успешно отправлена!'); modalOpen = false;" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Имя *</label>
-          <input type="text" required placeholder="Ваше имя" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Телефон *</label>
-          <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Комментарий / Вопрос</label>
-          <textarea rows="2" placeholder="Какой металл и толщину планируете варить?" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-lg text-sm transition">
-          Отправить заявку
-        </button>
-      </form>
-    </div>
-  </div>
+  </main>
 
 </body>
 </html>
