@@ -1,407 +1,379 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Лазерные сварочные аппараты M70 и D70</title>
-  <style>
-    /* --- СБРОС И ОСНОВНЫЕ СТИЛИ --- */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лазерные аппараты M70 и D70</title>
+    <style>
+        :root {
+            --primary-yellow: #ffcc00;
+            --primary-yellow-hover: #e6b800;
+            --dark-bg: #1e1e24;
+            --text-main: #2b2b2b;
+            --text-muted: #666666;
+            --bg-light: #f8f9fa;
+            --border-color: #e2e8f0;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.5;
-      color: #222222;
-      background-color: #f8f9fa;
-      padding-bottom: 60px;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
 
-    /* --- ШАПКА (HEADER) --- */
-    header {
-      background-color: #ffffff;
-      border-bottom: 3px solid #ffc107; /* Желтый акцент */
-      padding: 15px 0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+        /* Header */
+        header {
+            background-color: #ffffff;
+            border-bottom: 3px solid var(--primary-yellow);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
 
-    .logo img {
-      max-height: 50px;
-      width: auto;
-      display: block;
-    }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-    .header-contacts {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+        .logo img {
+            max-height: 50px;
+            width: auto;
+            display: block;
+        }
 
-    .phone-link {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #111111;
-      text-decoration: none;
-      background-color: #ffc107; /* Желтая кнопка телефона */
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
-    }
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-    .phone-link:hover {
-      background-color: #ffb300;
-    }
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #fff9e6;
+            border: 1px solid var(--primary-yellow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
 
-    /* --- ПЛАНКИ ПРЕИМУЩЕСТВ (БЕНЕФИТЫ) --- */
-    .benefits-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      margin: 30px 0;
-    }
+        .phone-link {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000000;
+            text-decoration: none;
+            background-color: var(--primary-yellow);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+        }
 
-    .benefit-card {
-      background-color: #ffffff;
-      border-left: 5px solid #ffc107; /* Желтая полоса слева */
-      padding: 15px 20px;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .phone-link:hover {
+            background-color: var(--primary-yellow-hover);
+        }
 
-    .benefit-icon {
-      font-size: 1.5rem;
-    }
+        /* Hero / Gallery Section */
+        .products-section {
+            padding: 40px 0;
+        }
 
-    .benefit-title {
-      font-size: 0.85rem;
-      color: #666666;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
 
-    .benefit-value {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #111111;
-    }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-yellow);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
 
-    /* --- ГАЛЕРЕЯ МОДЕЛЕЙ --- */
-    .section-title {
-      font-size: 1.75rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-      color: #111111;
-      position: relative;
-      padding-bottom: 8px;
-    }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
 
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background-color: #ffc107; /* Желтое подчеркивание заголовка */
-      border-radius: 2px;
-    }
+        .product-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--primary-yellow);
+        }
 
-    .product-card {
-      background-color: #ffffff;
-      border: 1px solid #e9ecef;
-      border-radius: 8px;
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+        .product-card img {
+            max-width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
 
-    .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      border-color: #ffc107;
-    }
+        .product-card h3 {
+            font-size: 1.2rem;
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            padding: 6px;
+            border-radius: 4px;
+        }
 
-    .product-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      margin-bottom: 12px;
-    }
+        /* Table Section */
+        .table-section {
+            background: #ffffff;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+        }
 
-    .product-card h3 {
-      font-size: 1.2rem;
-      color: #111111;
-      background-color: #fff8e1; /* Легкий желтый фон заголовка */
-      padding: 6px;
-      border-radius: 4px;
-    }
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
 
-    /* --- ТАБЛИЦА ХАРАКТЕРИСТИК --- */
-    .table-wrapper {
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      overflow-x: auto;
-      margin-bottom: 40px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            background-color: #ffffff;
+            min-width: 600px;
+        }
 
-    .specs-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      min-width: 600px;
-    }
+        th, td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    .specs-table th,
-    .specs-table td {
-      padding: 14px 20px;
-      border-bottom: 1px solid #e9ecef;
-    }
+        thead th {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
 
-    .specs-table th {
-      background-color: #111111; /* Тёмный заголовок для яркого контраста */
-      color: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
-    }
+        thead th.highlight {
+            background-color: var(--primary-yellow);
+            color: #000000;
+        }
 
-    .specs-table th.highlight-header {
-      color: #ffc107; /* Желтый текст для названий моделей */
-      text-align: center;
-      width: 25%;
-    }
+        tbody tr:nth-child(even) {
+            background-color: #fffdf5;
+        }
 
-    .specs-table tr:nth-child(even) {
-      background-color: #fffde7; /* Едва заметная желтая зебра для строк */
-    }
+        tbody tr:hover {
+            background-color: #fff8dc;
+        }
 
-    .specs-table tr:hover {
-      background-color: #fff9c4; /* Яркая подсвечиваемая строка при наведении */
-    }
+        td.feature-name {
+            font-weight: 600;
+            width: 40%;
+            color: var(--text-main);
+        }
 
-    .specs-table td:nth-child(2),
-    .specs-table td:nth-child(3) {
-      text-align: center;
-      font-weight: 600;
-    }
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            padding: 25px 0;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 4px solid var(--primary-yellow);
+        }
 
-    .badge-turbo {
-      display: inline-block;
-      background-color: #ffc107;
-      color: #111111;
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 4px;
-    }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
 
-    /* --- АДАПТИВНОСТЬ --- */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        text-align: center;
-      }
+            .header-info {
+                flex-direction: column;
+                width: 100%;
+            }
 
-      .header-contacts {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .phone-link {
-        width: 100%;
-        text-align: center;
-      }
-
-      .specs-table th,
-      .specs-table td {
-        padding: 10px 12px;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+            .info-badge, .phone-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ШАПКА С ЛОГОТИПОМ И КОНТАКТАМИ -->
-  <header>
-    <div class="container header-content">
-      <div class="logo">
-        <img src="images/logo.png" alt="Логотип компании">
-      </div>
-      <div class="header-contacts">
-        <a href="tel:+74953673277" class="phone-link">+7 495 367 32 77</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-
-    <!-- БЛОК ПРЕИМУЩЕСТВ (СКЛАД И ГАРАНТИЯ) -->
-    <section class="benefits-bar">
-      <div class="benefit-card">
-        <span class="benefit-icon">📍</span>
-        <div>
-          <div class="benefit-title">Локация / Наличие</div>
-          <div class="benefit-value">МО, г. Видное / Склад в РФ</div>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="Логотип">
+            </div>
+            <div class="header-info">
+                <div class="info-badge">
+                    📍 МО, г.Видное / Склад в РФ
+                </div>
+                <div class="info-badge">
+                    🛡️ Гарантия 12 месяцев
+                </div>
+                <a href="tel:+74953673277" class="phone-link">+7 495 367 32 77</a>
+            </div>
         </div>
-      </div>
-      <div class="benefit-card">
-        <span class="benefit-icon">🛡️</span>
-        <div>
-          <div class="benefit-title">Сервис и надежность</div>
-          <div class="benefit-value">Гарантия 12 месяцев</div>
+    </header>
+
+    <!-- Catalog Section -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Модельный ряд</h2>
+            <div class="gallery-grid">
+                <div class="product-card">
+                    <img src="images/M30.png" alt="M30">
+                    <h3>M30</h3>
+                </div>
+                <div class="product-card">
+                    <img src="images/M50.png" alt="M50">
+                    <h3>M50</h3>
+                </div>
+                <div class="product-card">
+                    <img src="images/M70.png" alt="M70">
+                    <h3>M70</h3>
+                </div>
+                <div class="product-card">
+                    <img src="images/D30.png" alt="D70">
+                    <h3>D70</h3>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- ГАЛЕРЕЯ МОДЕЛЕЙ -->
-    <section>
-      <h2 class="section-title">Модельный ряд</h2>
-      <div class="products-grid">
-        <div class="product-card">
-          <img src="images/M30.png" alt="Модель M30">
-          <h3>Модель M30</h3>
+    <!-- Comparison Table Section -->
+    <section class="table-section">
+        <div class="container">
+            <h2 class="section-title">Сравнение характеристик</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Характеристики</th>
+                            <th class="highlight">M70</th>
+                            <th class="highlight">D70</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Мощность лазера</td>
+                            <td>1800 Вт</td>
+                            <td>1800 Вт</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Режим работы</td>
+                            <td>Непрерывный / Точечный / Импульсный / Турбо</td>
+                            <td>Непрерывный / Точечный / Импульсный</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Вес сварочного пистолета</td>
+                            <td>&lt; 0.48 кг</td>
+                            <td>&lt; 0.48 кг</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Вес аппарата</td>
+                            <td>&lt; 45 кг</td>
+                            <td>&lt; 43 кг</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Размеры аппарата</td>
+                            <td>654 × 286 × 574 мм</td>
+                            <td>637 × 274 × 574 мм</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Входное напряжение</td>
+                            <td>180–264 В, 50/60 Гц</td>
+                            <td>180–264 В, 50/60 Гц</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Способ охлаждения</td>
+                            <td>Принудительное воздушное охлаждение</td>
+                            <td>Принудительное воздушное охлаждение</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Функции</td>
+                            <td>Сварка / Резка / Очистка</td>
+                            <td>Сварка / Резка / Очистка</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Устройство подачи проволоки</td>
+                            <td>Встроено</td>
+                            <td>Встроено</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Макс. глубина сварки, нержавеющая сталь</td>
+                            <td>7 мм</td>
+                            <td>7 мм</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Макс. глубина сварки, углеродистая сталь</td>
+                            <td>7 мм</td>
+                            <td>7 мм</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Макс. глубина сварки, оцинкованная сталь</td>
+                            <td>7 мм</td>
+                            <td>7 мм</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Макс. глубина сварки, алюминий</td>
+                            <td>5.5 мм</td>
+                            <td>5.5 мм</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Макс. глубина сварки, латунь</td>
+                            <td>6 мм</td>
+                            <td>6 мм</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Макс. глубина сварки, медь</td>
+                            <td>2.5 мм</td>
+                            <td>2.5 мм</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="product-card">
-          <img src="images/M50.png" alt="Модель M50">
-          <h3>Модель M50</h3>
-        </div>
-        <div class="product-card">
-          <img src="images/M70.png" alt="Модель M70">
-          <h3>Модель M70</h3>
-        </div>
-        <div class="product-card">
-          <img src="images/D30.png" alt="Модель D70">
-          <h3>Модель D70</h3>
-        </div>
-      </div>
     </section>
 
-    <!-- СРАВНИТЕЛЬНАЯ ТАБЛИЦА ХАРАКТЕРИСТИК -->
-    <section>
-      <h2 class="section-title">Технические характеристики M70 и D70</h2>
-      <div class="table-wrapper">
-        <table class="specs-table">
-          <thead>
-            <tr>
-              <th>Характеристики</th>
-              <th class="highlight-header">M70</th>
-              <th class="highlight-header">D70</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Мощность лазера</td>
-              <td>1800 Вт</td>
-              <td>1800 Вт</td>
-            </tr>
-            <tr>
-              <td>Режим работы</td>
-              <td>Непрерывный / Точечный / Импульсный / Турбо <span class="badge-turbo">TURBO</span></td>
-              <td>Непрерывный / Точечный / Импульсный</td>
-            </tr>
-            <tr>
-              <td>Вес сварочного пистолета</td>
-              <td>&lt; 0.48 кг</td>
-              <td>&lt; 0.48 кг</td>
-            </tr>
-            <tr>
-              <td>Вес аппарата</td>
-              <td>&lt; 45 кг</td>
-              <td>&lt; 43 кг</td>
-            </tr>
-            <tr>
-              <td>Размеры аппарата (Д × Ш × В)</td>
-              <td>654 × 286 × 574 мм</td>
-              <td>637 × 274 × 574 мм</td>
-            </tr>
-            <tr>
-              <td>Входное напряжение</td>
-              <td>180–264 В, 50/60 Гц</td>
-              <td>180–264 В, 50/60 Гц</td>
-            </tr>
-            <tr>
-              <td>Способ охлаждения</td>
-              <td>Принудительное воздушное охлаждение</td>
-              <td>Принудительное воздушное охлаждение</td>
-            </tr>
-            <tr>
-              <td>Функции</td>
-              <td>Сварка / Резка / Очистка</td>
-              <td>Сварка / Резка / Очистка</td>
-            </tr>
-            <tr>
-              <td>Устройство подачи проволоки</td>
-              <td>Встроено</td>
-              <td>Встроено</td>
-            </tr>
-            <tr>
-              <td>Максимальная глубина сварки, нержавеющая сталь</td>
-              <td>7 мм</td>
-              <td>7 мм</td>
-            </tr>
-            <tr>
-              <td>Максимальная глубина сварки, углеродистая сталь</td>
-              <td>7 мм</td>
-              <td>7 мм</td>
-            </tr>
-            <tr>
-              <td>Максимальная глубина сварки, оцинкованная сталь</td>
-              <td>7 мм</td>
-              <td>7 мм</td>
-            </tr>
-            <tr>
-              <td>Максимальная глубина сварки, алюминий</td>
-              <td>5.5 мм</td>
-              <td>5.5 мм</td>
-            </tr>
-            <tr>
-              <td>Максимальная глубина сварки, латунь</td>
-              <td>6 мм</td>
-              <td>6 мм</td>
-            </tr>
-            <tr>
-              <td>Максимальная глубина сварки, медь</td>
-              <td>2.5 мм</td>
-              <td>2.5 мм</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>МО, г.Видное / Склад в РФ &bull; Телефон: +7 495 367 32 77 &bull; Гарантия 12 месяцев</p>
+        </div>
+    </footer>
 
 </body>
 </html>
